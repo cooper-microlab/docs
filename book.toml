@@ -1,0 +1,9 @@
+[book]
+title    = 'Cooper Union µLab Documentation'
+language = 'en'
+
+[build]
+build-dir = 'build/'
+
+[output.html]
+no-section-label = true
