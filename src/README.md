@@ -14,3 +14,12 @@ parent institution.  With that comes a few perks:
 * Dozens of virtual machines & containers hosting services
 * Fifty-five workstations which are all centrally managed & orchestrated
 * Five physical servers (including a GPU compute node!)
+
+
+## License
+
+Cooper Union µLab documentation is distributed under the [CC BY-NC-SA
+4.0].
+
+
+[CC BY-NC-SA 4.0]: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
