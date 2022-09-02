@@ -13,7 +13,7 @@ parent institution.  With that comes a few perks:
 * Full control over the `199.98.27.0/24` subnet
 * Dozens of virtual machines & containers hosting services
 * Fifty-five workstations which are all centrally managed & orchestrated
-* Five physical servers (including a GPU compute node!)
+* Six physical servers (including a GPU compute node!)
 
 
 ## License
