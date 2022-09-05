@@ -1,5 +1,6 @@
 [book]
 title    = 'Cooper Union µLab Documentation'
+authors  = ['Jacob Koziej']
 language = 'en'
 
 [build]
