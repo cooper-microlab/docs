@@ -72,4 +72,49 @@ connection to see if that resolves the issue.  If this persists, please
 reach out to [`<eeadmin@cooper.edu>`].
 
 
+## Adding an SSH Configuration
+
+Having to type such a long command can become tiring quite fast.  Using
+a non-standard SSH port also creates the annoying situation of having to
+manually specify the port for each program that uses SSH internally.  If
+only we could avoid this headache!
+
+To avoid this conundrum, you'll need to add a few things to your SSH
+configuration file.  This file is located at `~/.ssh/config` on
+UNIX-like operating systems and `%USERPROFILE%\.ssh\config` (typically
+`C:\Users\username\.ssh\config`) on Windows . Open this file in a text
+editor of your choice and add the following:
+
+```
+Host *.ee.cooper.edu
+	User first.last
+	Port 31415
+```
+
+After the addition of these lines, you'll be able to connect using SSH
+like so:
+
+```
+$ ssh dev.ee.cooper.edu
+```
+
+Let's say you wanted to type even less because you often SSH into the
+remote development machine.  You can add a host alias to your SSH
+configuration file like so:
+
+```
+Host dev
+	Hostname dev.ee.cooper.edu
+	User first.last
+	Port 31415
+```
+
+Now all you'd need to type to SSH to the remote development machine
+would be:
+
+```
+$ ssh dev
+```
+
+
 [`<eeadmin@cooper.edu>`]: mailto:eeadmin@cooper.edu
