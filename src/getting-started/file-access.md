@@ -143,4 +143,16 @@ $ _
 ```
 
 
+## FileZilla
+
+If command line programs aren't your thing, there's always [FileZilla].
+When connecting, you'll need to specify the following information:
+
+* Host: `sftp://dev.ee.cooper.edu`
+* Username: `first.last`
+* Password: `****************`
+* Port: `31415`
+
+
 [SSH configuration]: ssh.md#adding-an-ssh-configuration
+[FileZilla]: https://filezilla-project.org/
