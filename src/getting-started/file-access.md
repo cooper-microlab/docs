@@ -60,4 +60,87 @@ $ _
 > ```
 
 
+## SFTP
+
+OpenSSH secure file transfer (`sftp`) is a client which gives you an
+interactive way to transfer files to remote hosts.  To begin an
+interactive session type the following:
+
+```
+$ sftp -P 31415 first.last@dev.ee.cooper.edu
+Connected to dev.ee.cooper.edu.
+sftp> _
+```
+
+To see a list of commands, type `help`:
+
+```
+sftp> help
+Available commands:
+bye                                Quit sftp
+cd path                            Change remote directory to 'path'
+chgrp [-h] grp path                Change group of file 'path' to 'grp'
+chmod [-h] mode path               Change permissions of file 'path' to 'mode'
+chown [-h] own path                Change owner of file 'path' to 'own'
+copy oldpath newpath               Copy remote file
+cp oldpath newpath                 Copy remote file
+df [-hi] [path]                    Display statistics for current directory or
+                                   filesystem containing 'path'
+exit                               Quit sftp
+get [-afpR] remote [local]         Download file
+help                               Display this help text
+lcd path                           Change local directory to 'path'
+lls [ls-options [path]]            Display local directory listing
+lmkdir path                        Create local directory
+ln [-s] oldpath newpath            Link remote file (-s for symlink)
+lpwd                               Print local working directory
+ls [-1afhlnrSt] [path]             Display remote directory listing
+lumask umask                       Set local umask to 'umask'
+mkdir path                         Create remote directory
+progress                           Toggle display of progress meter
+put [-afpR] local [remote]         Upload file
+pwd                                Display remote working directory
+quit                               Quit sftp
+reget [-fpR] remote [local]        Resume download file
+rename oldpath newpath             Rename remote file
+reput [-fpR] local [remote]        Resume upload file
+rm path                            Delete remote file
+rmdir path                         Remove remote directory
+symlink oldpath newpath            Symlink remote file
+version                            Show SFTP version
+!command                           Execute 'command' in local shell
+!                                  Escape to local shell
+?                                  Synonym for help
+sftp> _
+```
+
+As an example, lets see how we'd do everything we did with `scp` with
+`sftp`:
+
+```
+sftp> get cu/ece-160/homework.c .
+Fetching /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/homework.c to ./homework.c
+homework.c                                            100% 1247    68.5KB/s   00:00
+sftp> put project.c cu/ece-160/
+Uploading project.c to /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/
+project.c                                             100% 1247   137.3KB/s   00:00
+sftp> get -R cu/ece-160 .
+Fetching /afs/ee.cooper.edu/user/j/jacob.koziej/cu/ece-160/ to ./ece-160
+Retrieving /afs/ee.cooper.edu/user/j/jacob.koziej/cu/ece-160
+homework.c                                            100% 1247    81.3KB/s   00:00
+project.c                                             100% 3102   171.4KB/s   00:00
+lesson-0.md                                           100% 2783   251.6KB/s   00:00
+assignment-0.md                                       100% 1492   152.7KB/s   00:00
+...
+sftp> _
+```
+
+Once you're done, either type `exit` or press `^D` to quit.
+
+```
+sftp> exit
+$ _
+```
+
+
 [SSH configuration]: ssh.md#adding-an-ssh-configuration
