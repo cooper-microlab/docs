@@ -20,6 +20,16 @@ cause issues when connecting to hosts.  To avoid this, change the
 `remote.SSH.lockfilesInTmp` setting to `true`.
 
 
+## Stale Sessions
+
+If you leave your session running for an extended period, your Kerberos
+ticket may expire, preventing you from editing files.  To circumvent
+this, you'll need to kill your existing session and initiate a new one.
+You can do this by opening the command pallet and searching for
+`Remote-SSH: Kill VS Code Server on Host...` and selecting the
+appropriate host when prompted.
+
+
 [VS Code]: https://code.visualstudio.com/
 [editor extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
 [official guide]: https://code.visualstudio.com/docs/remote/ssh-tutorial
