@@ -12,6 +12,14 @@ hosts.
 > your [SSH configuration] to decrease the complexity of connecting!
 
 
+## Lock Files in `/tmp`
+
+Since we have a federated login for µLab with home directories stored on
+a network file system, lock files stored in a user home directory can
+cause issues when connecting to hosts.  To avoid this, change the
+`remote.SSH.lockfilesInTmp` setting to `true`.
+
+
 [VS Code]: https://code.visualstudio.com/
 [editor extension]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh
 [official guide]: https://code.visualstudio.com/docs/remote/ssh-tutorial
