@@ -125,8 +125,8 @@ sftp> put project.c cu/ece-160/
 Uploading project.c to /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/
 project.c                                             100% 1247   137.3KB/s   00:00
 sftp> get -R cu/ece-160 .
-Fetching /afs/ee.cooper.edu/user/j/jacob.koziej/cu/ece-160/ to ./ece-160
-Retrieving /afs/ee.cooper.edu/user/j/jacob.koziej/cu/ece-160
+Fetching /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/ to ./ece-160
+Retrieving /afs/ee.cooper.edu/user/f/first.last/cu/ece-160
 homework.c                                            100% 1247    81.3KB/s   00:00
 project.c                                             100% 3102   171.4KB/s   00:00
 lesson-0.md                                           100% 2783   251.6KB/s   00:00
