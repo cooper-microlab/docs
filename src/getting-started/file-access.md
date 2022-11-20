@@ -32,7 +32,7 @@ directory to the folder `~/cu/ece-160/`:
 ```
 $ scp -P 31415 project.c first.last@dev.ee.cooper.edu:cu/ece-160
 (first.last@dev.ee.cooper.edu) Password:
-project.c                    100% 3102   140.7KB/s   00:00
+project.c                          100% 3102   140.7KB/s   00:00
 $ _
 ```
 
