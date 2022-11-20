@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="getting-started/file-access.html">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="tutorials/vs-code-remote-development.html">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="getting-started/file-access.html">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Software</li><li class="chapter-item expanded "><a href="software/common.html">Common</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="tutorials/vs-code-remote-development.html">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -362,6 +362,61 @@ When connecting, you'll need to specify the following information:</p>
 <li>Password: <code>****************</code></li>
 <li>Port: <code>31415</code></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="common"><a class="header" href="#common">Common</a></h1>
+<p>Here is a list of software guaranteed to be installed on <strong>all</strong> µLab
+hosts:</p>
+<ul>
+<li>Build Systems:
+<ul>
+<li><a href="https://cmake.org/">CMake</a> - tools designed to build, test, and package software</li>
+<li><a href="https://www.gnu.org/software/make/">Make</a> - controls the generation of executables and non-source files</li>
+<li><a href="https://mesonbuild.com/">Meson Build</a> - extremely fast and user friendly build system</li>
+<li><a href="https://scons.org/">SCons</a> - a software construction tool</li>
+</ul>
+</li>
+<li>Editors:
+<ul>
+<li><a href="https://www.gnu.org/software/ed/">ed</a> - line-oriented text editor</li>
+<li><a href="https://www.gnu.org/software/emacs/">Emacs</a> - an extensible, customizable, text editor, and more</li>
+<li><a href="https://www.nano-editor.org/">nano</a> - a small and simple text editor</li>
+<li><a href="https://neovim.io/">Neovim</a> - hyper extensible Vim-based text editor</li>
+<li><a href="https://www.vim.org/">Vim</a> - the ubiquitous text editor</li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a><sup class="footnote-reference"><a href="#non-headless">1</a></sup> - editor optimized for building
+and debugging</li>
+</ul>
+</li>
+<li>Shells:
+<ul>
+<li><a href="https://www.gnu.org/software/bash/">Bash</a> - the Bourne Again SHell</li>
+<li><a href="https://fishshell.com/">fish shell</a> - the user-friendly command line shell</li>
+<li><a href="https://zsh.sourceforge.io/">Zsh</a> - the Z Shell</li>
+</ul>
+</li>
+<li>Utils:
+<ul>
+<li><a href="https://github.com/sharkdp/bat">bat</a> - a <code>cat</code> clone with wings</li>
+<li><a href="https://the.exa.website/">exa</a> - a modern replacement for <code>ls</code></li>
+<li><a href="https://github.com/sharkdp/fd">fd</a> - a simple, fast and user-friendly alternative to <code>find</code></li>
+<li><a href="https://github.com/junegunn/fzf">fzf</a> - a command-line fuzzy finder</li>
+<li><a href="https://git-scm.com/">Git</a> - fast, scalable, distributed revision control system</li>
+<li><a href="https://git-lfs.github.com/">Git LFS</a> - git extension for versioning large files</li>
+<li><a href="https://gnupg.org/">GnuPG</a> - a complete and free implementation of the OpenPGP</li>
+<li><a href="https://htop.dev/">htop</a> - an interactive process viewer</li>
+<li><a href="https://man-db.gitlab.io/man-db/">man-db</a> - the on-line manual database</li>
+<li><a href="https://www.kernel.org/doc/man-pages/">man-pages</a> - the Linux man-pages project</li>
+<li><a href="https://mosh.org/">Mosh</a> - the mobile shell</li>
+<li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> - recursive regex pattern finder respecting your
+<code>.gitignore</code></li>
+<li><a href="https://www.shellcheck.net/">shellcheck</a> - shell script analysis tool</li>
+<li><a href="https://github.com/mvdan/sh">shfmt</a> - a shell parser and formatter for POSIX shell and <code>bash</code></li>
+<li><a href="https://github.com/tmux/tmux">tmux</a> - a terminal multiplexer</li>
+<li><a href="https://mama.indstate.edu/users/ice/tree/">tree</a> - a recursive directory listing command</li>
+</ul>
+</li>
+</ul>
+<div class="footnote-definition" id="non-headless"><sup class="footnote-definition-label">1</sup>
+<p>Not installed on headless systems.</p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="vs-code-remote-development"><a class="header" href="#vs-code-remote-development">VS Code Remote Development</a></h1>
 <p><a href="https://code.visualstudio.com/">VS Code</a> is one of the most popular text editors, and it'd be a shame
 if you couldn't use it on µLab hosts if it is your editor of choice.

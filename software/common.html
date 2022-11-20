@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>File Access - Cooper Union µLab Documentation</title>
+        <title>Common - Cooper Union µLab Documentation</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="../getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="../getting-started/file-access.html" class="active">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Software</li><li class="chapter-item expanded "><a href="../software/common.html">Common</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="../tutorials/vs-code-remote-development.html">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="../getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="../getting-started/file-access.html">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Software</li><li class="chapter-item expanded "><a href="../software/common.html" class="active">Common</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="../tutorials/vs-code-remote-development.html">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,137 +134,70 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="file-access"><a class="header" href="#file-access">File Access</a></h1>
-<p>Accessing your µLab files necessitates a file-transfer client that
-supports the SSH protocol.  Although there are a lot of clients to
-choose from, we'll cover a few of the most popular options.</p>
-<h2 id="scp"><a class="header" href="#scp">SCP</a></h2>
-<p>OpenSSH secure file copy (<code>scp</code>) is a command that behaves much like the
-<code>cp</code> command with the added bonus of working over SSH.  The command has
-the following semantics:</p>
-<pre><code>$ scp [OPTIONS] source ... target
-</code></pre>
-<p>Lets say you want to download a file called <code>homework.c</code> under
-<code>~/cu/ece-160/</code> to your local directory, the command would be as
-follows:</p>
-<pre><code>$ scp -P 31415 first.last@dev.ee.cooper.edu:cu/ece-160/homework.c .
-(first.last@dev.ee.cooper.edu) Password:
-homework.c                            100% 1247    60.8KB/s   00:00
-$ _
-</code></pre>
-<p>Or lets say you wanted to copy a file called <code>project.c</code> in your local
-directory to the folder <code>~/cu/ece-160/</code>:</p>
-<pre><code>$ scp -P 31415 project.c first.last@dev.ee.cooper.edu:cu/ece-160
-(first.last@dev.ee.cooper.edu) Password:
-project.c                          100% 3102   140.7KB/s   00:00
-$ _
-</code></pre>
-<p>And if you want to move a directory, you'll have to run the command
-recursively with the <code>-r</code> flag:</p>
-<pre><code>$ scp -r -P 31415 first.last@dev.ee.cooper.edu:cu/ece-160 .
-(first.last@dev.ee.cooper.edu) Password:
-homework.c                    100% 1247    74.2KB/s   00:00
-project.c                     100% 3102   167.6KB/s   00:00
-lesson-0.md                   100% 2783   135.9KB/s   00:00
-assignment-0.md               100% 1492    76.1KB/s   00:00
-...
-$ _
-</code></pre>
-<blockquote>
-<p>Note that if you added µLab hosts to your <a href="ssh.html#adding-an-ssh-configuration">SSH configuration</a> the
-commands above could have been simplified down to the following:</p>
-<pre><code>$ scp dev.ee.cooper.edu:cu/ece-160/homework.c .
-$ scp project.c dev.ee.cooper.edu:/tmp
-$ scp -r @dev.ee.cooper.edu:cu/ece-160 .
-</code></pre>
-</blockquote>
-<h2 id="sftp"><a class="header" href="#sftp">SFTP</a></h2>
-<p>OpenSSH secure file transfer (<code>sftp</code>) is a client which gives you an
-interactive way to transfer files to remote hosts.  To begin an
-interactive session type the following:</p>
-<pre><code>$ sftp -P 31415 first.last@dev.ee.cooper.edu
-Connected to dev.ee.cooper.edu.
-sftp&gt; _
-</code></pre>
-<p>To see a list of commands, type <code>help</code>:</p>
-<pre><code>sftp&gt; help
-Available commands:
-bye                                Quit sftp
-cd path                            Change remote directory to 'path'
-chgrp [-h] grp path                Change group of file 'path' to 'grp'
-chmod [-h] mode path               Change permissions of file 'path' to 'mode'
-chown [-h] own path                Change owner of file 'path' to 'own'
-copy oldpath newpath               Copy remote file
-cp oldpath newpath                 Copy remote file
-df [-hi] [path]                    Display statistics for current directory or
-                                   filesystem containing 'path'
-exit                               Quit sftp
-get [-afpR] remote [local]         Download file
-help                               Display this help text
-lcd path                           Change local directory to 'path'
-lls [ls-options [path]]            Display local directory listing
-lmkdir path                        Create local directory
-ln [-s] oldpath newpath            Link remote file (-s for symlink)
-lpwd                               Print local working directory
-ls [-1afhlnrSt] [path]             Display remote directory listing
-lumask umask                       Set local umask to 'umask'
-mkdir path                         Create remote directory
-progress                           Toggle display of progress meter
-put [-afpR] local [remote]         Upload file
-pwd                                Display remote working directory
-quit                               Quit sftp
-reget [-fpR] remote [local]        Resume download file
-rename oldpath newpath             Rename remote file
-reput [-fpR] local [remote]        Resume upload file
-rm path                            Delete remote file
-rmdir path                         Remove remote directory
-symlink oldpath newpath            Symlink remote file
-version                            Show SFTP version
-!command                           Execute 'command' in local shell
-!                                  Escape to local shell
-?                                  Synonym for help
-sftp&gt; _
-</code></pre>
-<p>As an example, lets see how we'd do everything we did with <code>scp</code> with
-<code>sftp</code>:</p>
-<pre><code>sftp&gt; get cu/ece-160/homework.c .
-Fetching /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/homework.c to ./homework.c
-homework.c                                            100% 1247    68.5KB/s   00:00
-sftp&gt; put project.c cu/ece-160/
-Uploading project.c to /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/
-project.c                                             100% 1247   137.3KB/s   00:00
-sftp&gt; get -R cu/ece-160 .
-Fetching /afs/ee.cooper.edu/user/f/first.last/cu/ece-160/ to ./ece-160
-Retrieving /afs/ee.cooper.edu/user/f/first.last/cu/ece-160
-homework.c                                            100% 1247    81.3KB/s   00:00
-project.c                                             100% 3102   171.4KB/s   00:00
-lesson-0.md                                           100% 2783   251.6KB/s   00:00
-assignment-0.md                                       100% 1492   152.7KB/s   00:00
-...
-sftp&gt; _
-</code></pre>
-<p>Once you're done, either type <code>exit</code> or press <code>^D</code> to quit.</p>
-<pre><code>sftp&gt; exit
-$ _
-</code></pre>
-<h2 id="filezilla"><a class="header" href="#filezilla">FileZilla</a></h2>
-<p>If command line programs aren't your thing, there's always <a href="https://filezilla-project.org/">FileZilla</a>.
-When connecting, you'll need to specify the following information:</p>
+                        <h1 id="common"><a class="header" href="#common">Common</a></h1>
+<p>Here is a list of software guaranteed to be installed on <strong>all</strong> µLab
+hosts:</p>
 <ul>
-<li>Host: <code>sftp://dev.ee.cooper.edu</code></li>
-<li>Username: <code>first.last</code></li>
-<li>Password: <code>****************</code></li>
-<li>Port: <code>31415</code></li>
+<li>Build Systems:
+<ul>
+<li><a href="https://cmake.org/">CMake</a> - tools designed to build, test, and package software</li>
+<li><a href="https://www.gnu.org/software/make/">Make</a> - controls the generation of executables and non-source files</li>
+<li><a href="https://mesonbuild.com/">Meson Build</a> - extremely fast and user friendly build system</li>
+<li><a href="https://scons.org/">SCons</a> - a software construction tool</li>
 </ul>
+</li>
+<li>Editors:
+<ul>
+<li><a href="https://www.gnu.org/software/ed/">ed</a> - line-oriented text editor</li>
+<li><a href="https://www.gnu.org/software/emacs/">Emacs</a> - an extensible, customizable, text editor, and more</li>
+<li><a href="https://www.nano-editor.org/">nano</a> - a small and simple text editor</li>
+<li><a href="https://neovim.io/">Neovim</a> - hyper extensible Vim-based text editor</li>
+<li><a href="https://www.vim.org/">Vim</a> - the ubiquitous text editor</li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a><sup class="footnote-reference"><a href="#non-headless">1</a></sup> - editor optimized for building
+and debugging</li>
+</ul>
+</li>
+<li>Shells:
+<ul>
+<li><a href="https://www.gnu.org/software/bash/">Bash</a> - the Bourne Again SHell</li>
+<li><a href="https://fishshell.com/">fish shell</a> - the user-friendly command line shell</li>
+<li><a href="https://zsh.sourceforge.io/">Zsh</a> - the Z Shell</li>
+</ul>
+</li>
+<li>Utils:
+<ul>
+<li><a href="https://github.com/sharkdp/bat">bat</a> - a <code>cat</code> clone with wings</li>
+<li><a href="https://the.exa.website/">exa</a> - a modern replacement for <code>ls</code></li>
+<li><a href="https://github.com/sharkdp/fd">fd</a> - a simple, fast and user-friendly alternative to <code>find</code></li>
+<li><a href="https://github.com/junegunn/fzf">fzf</a> - a command-line fuzzy finder</li>
+<li><a href="https://git-scm.com/">Git</a> - fast, scalable, distributed revision control system</li>
+<li><a href="https://git-lfs.github.com/">Git LFS</a> - git extension for versioning large files</li>
+<li><a href="https://gnupg.org/">GnuPG</a> - a complete and free implementation of the OpenPGP</li>
+<li><a href="https://htop.dev/">htop</a> - an interactive process viewer</li>
+<li><a href="https://man-db.gitlab.io/man-db/">man-db</a> - the on-line manual database</li>
+<li><a href="https://www.kernel.org/doc/man-pages/">man-pages</a> - the Linux man-pages project</li>
+<li><a href="https://mosh.org/">Mosh</a> - the mobile shell</li>
+<li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> - recursive regex pattern finder respecting your
+<code>.gitignore</code></li>
+<li><a href="https://www.shellcheck.net/">shellcheck</a> - shell script analysis tool</li>
+<li><a href="https://github.com/mvdan/sh">shfmt</a> - a shell parser and formatter for POSIX shell and <code>bash</code></li>
+<li><a href="https://github.com/tmux/tmux">tmux</a> - a terminal multiplexer</li>
+<li><a href="https://mama.indstate.edu/users/ice/tree/">tree</a> - a recursive directory listing command</li>
+</ul>
+</li>
+</ul>
+<div class="footnote-definition" id="non-headless"><sup class="footnote-definition-label">1</sup>
+<p>Not installed on headless systems.</p>
+</div>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../getting-started/ssh.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../getting-started/file-access.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../software/common.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tutorials/vs-code-remote-development.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -273,10 +206,10 @@ When connecting, you'll need to specify the following information:</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../getting-started/ssh.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../getting-started/file-access.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../software/common.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tutorials/vs-code-remote-development.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
