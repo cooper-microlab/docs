@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="getting-started/file-access.html">File Access</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="getting-started/file-access.html">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="tutorials/vs-code-remote-development.html">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -362,6 +362,30 @@ When connecting, you'll need to specify the following information:</p>
 <li>Password: <code>****************</code></li>
 <li>Port: <code>31415</code></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vs-code-remote-development"><a class="header" href="#vs-code-remote-development">VS Code Remote Development</a></h1>
+<p><a href="https://code.visualstudio.com/">VS Code</a> is one of the most popular text editors, and it'd be a shame
+if you couldn't use it on µLab hosts if it is your editor of choice.
+Thankfully Microsoft provides an easy-to-use <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">editor extension</a> that
+allows working remotely over SSH without much configuration.  Feel free
+to reference the <a href="https://code.visualstudio.com/docs/remote/ssh-tutorial">official guide</a>, as we'll only cover configuration
+changes and quirks you may run into while remotely editing on µLab
+hosts.</p>
+<blockquote>
+<p>Before getting started, we <em>highly</em> recommend you add µLab hosts to
+your <a href="tutorials/../getting-started/ssh.html#adding-an-ssh-configuration">SSH configuration</a> to decrease the complexity of connecting!</p>
+</blockquote>
+<h2 id="lock-files-in-tmp"><a class="header" href="#lock-files-in-tmp">Lock Files in <code>/tmp</code></a></h2>
+<p>Since we have a federated login for µLab with home directories stored on
+a network file system, lock files stored in a user home directory can
+cause issues when connecting to hosts.  To avoid this, change the
+<code>remote.SSH.lockfilesInTmp</code> setting to <code>true</code>.</p>
+<h2 id="stale-sessions"><a class="header" href="#stale-sessions">Stale Sessions</a></h2>
+<p>If you leave your session running for an extended period, your Kerberos
+ticket may expire, preventing you from editing files.  To circumvent
+this, you'll need to kill your existing session and initiate a new one.
+You can do this by opening the command pallet and searching for
+<code>Remote-SSH: Kill VS Code Server on Host...</code> and selecting the
+appropriate host when prompted.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="contributors"><a class="header" href="#contributors">Contributors</a></h1>
 <p>Here is a list of the contributors who have helped in writing our
 documentation, huge shout-out to them!</p>

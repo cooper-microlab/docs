@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Connecting with SSH - Cooper Union µLab Documentation</title>
+        <title>VS Code Remote Development - Cooper Union µLab Documentation</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="../getting-started/ssh.html" class="active">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="../getting-started/file-access.html">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="../tutorials/vs-code-remote-development.html">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../contributors.html">Contributors</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Getting Started</li><li class="chapter-item expanded "><a href="../getting-started/ssh.html">Connecting with SSH</a></li><li class="chapter-item expanded "><a href="../getting-started/file-access.html">File Access</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorials</li><li class="chapter-item expanded "><a href="../tutorials/vs-code-remote-development.html" class="active">VS Code Remote Development</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../contributors.html">Contributors</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -134,102 +134,39 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="connecting-with-ssh"><a class="header" href="#connecting-with-ssh">Connecting with SSH</a></h1>
-<p>The Secure Shell Protocol, or SSH for short, is your gateway for
-accessing µLab resources.  Using SSH, you can conceivably access any of
-our resources from anywhere in the world with the bonus of being safe
-and secure!</p>
-<h2 id="invoking-the-ssh-client"><a class="header" href="#invoking-the-ssh-client">Invoking the SSH Client</a></h2>
-<p>At its most basic level, SSH provides you with a remote shell.  As such,
-you will need to utilize a terminal to make a connection.</p>
-<p>Open a new terminal or command prompt window and type the following:</p>
-<pre><code>$ ssh -p31415 first.last@dev.ee.cooper.edu
-</code></pre>
-<p>Let's breakdown the command:</p>
-<ul>
-<li><code>ssh</code>: the invocation of the SSH program</li>
-<li><code>-p31415</code>: if you're trying to connect outside of the Cooper network,
-you'll need to manually specify port <code>31415</code> as the school's firewall
-blocks SSH's default port</li>
-<li><code>first.last</code>: your µlab username</li>
-<li><code>dev.ee.cooper.edu</code>: the host which we are trying to connect (this can
-be any valid hostname running an SSH daemon)</li>
-</ul>
-<p>If you're connecting for the first time to a machine, you might have to
-accept the host's key fingerprint:</p>
-<pre><code>$ ssh -p31415 first.last@dev.ee.cooper.edu
-The authenticity of host '[dev.ee.cooper.edu]:31415 ([199.98.27.254]:31415)' can't be established.
-ED25519 key fingerprint is SHA256:w1duK0IPo7QWWBInuQKk7fdoYefMvi1SAZ8giVmDVQA.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? _
-</code></pre>
-<p>All you need to do here is to type <code>yes</code>.</p>
-<p>There's some very clever cryptography working behind the scenes to
-ensure your connection is secure.  The math governing this is far beyond
-the scope of this short guide, but it is here to prevent what's called a
-&quot;man-in-the-middle attack.&quot;  If a malicious entity were to intercept
-your SSH connection, you might see the following if you were to try
-connecting again:</p>
-<pre><code>$ ssh -p31415 first.last@dev.ee.cooper.edu
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-The fingerprint for the ED25519 key sent by the remote host is
-SHA256:someMaliciousKeyOverHereDontTryConnecting11.
-Please contact your system administrator.
-Add correct host key in /home/user/.ssh/known_hosts to get rid of this message.
-Offending RSA key in /home/user/.ssh/known_hosts:1
-Host key for [dev.ee.cooper.edu]:31415 has changed and you have requested strict checking.
-Host key verification failed
-$ _
-</code></pre>
-<p>If you see this message above when you attempt to connect, and you don't
-know for sure that the host key fingerprints have changed, <strong>DO NOT
-ATTEMPT TO CONNECT!</strong>  Instead, try to move to a different network
-connection to see if that resolves the issue.  If this persists, please
-reach out to <a href="mailto:eeadmin@cooper.edu"><code>&lt;eeadmin@cooper.edu&gt;</code></a>.</p>
-<h2 id="adding-an-ssh-configuration"><a class="header" href="#adding-an-ssh-configuration">Adding an SSH Configuration</a></h2>
-<p>Having to type such a long command can become tiring quite fast.  Using
-a non-standard SSH port also creates the annoying situation of having to
-manually specify the port for each program that uses SSH internally.  If
-only we could avoid this headache!</p>
-<p>To avoid this conundrum, you'll need to add a few things to your SSH
-configuration file.  This file is located at <code>~/.ssh/config</code> on
-UNIX-like operating systems and <code>%USERPROFILE%\.ssh\config</code> (typically
-<code>C:\Users\username\.ssh\config</code>) on Windows . Open this file in a text
-editor of your choice and add the following:</p>
-<pre><code>Host *.ee.cooper.edu
-	User first.last
-	Port 31415
-</code></pre>
-<p>After the addition of these lines, you'll be able to connect using SSH
-like so:</p>
-<pre><code>$ ssh dev.ee.cooper.edu
-</code></pre>
-<p>Let's say you wanted to type even less because you often SSH into the
-remote development machine.  You can add a host alias to your SSH
-configuration file like so:</p>
-<pre><code>Host dev
-	Hostname dev.ee.cooper.edu
-	User first.last
-	Port 31415
-</code></pre>
-<p>Now all you'd need to type to SSH to the remote development machine
-would be:</p>
-<pre><code>$ ssh dev
-</code></pre>
+                        <h1 id="vs-code-remote-development"><a class="header" href="#vs-code-remote-development">VS Code Remote Development</a></h1>
+<p><a href="https://code.visualstudio.com/">VS Code</a> is one of the most popular text editors, and it'd be a shame
+if you couldn't use it on µLab hosts if it is your editor of choice.
+Thankfully Microsoft provides an easy-to-use <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">editor extension</a> that
+allows working remotely over SSH without much configuration.  Feel free
+to reference the <a href="https://code.visualstudio.com/docs/remote/ssh-tutorial">official guide</a>, as we'll only cover configuration
+changes and quirks you may run into while remotely editing on µLab
+hosts.</p>
+<blockquote>
+<p>Before getting started, we <em>highly</em> recommend you add µLab hosts to
+your <a href="../getting-started/ssh.html#adding-an-ssh-configuration">SSH configuration</a> to decrease the complexity of connecting!</p>
+</blockquote>
+<h2 id="lock-files-in-tmp"><a class="header" href="#lock-files-in-tmp">Lock Files in <code>/tmp</code></a></h2>
+<p>Since we have a federated login for µLab with home directories stored on
+a network file system, lock files stored in a user home directory can
+cause issues when connecting to hosts.  To avoid this, change the
+<code>remote.SSH.lockfilesInTmp</code> setting to <code>true</code>.</p>
+<h2 id="stale-sessions"><a class="header" href="#stale-sessions">Stale Sessions</a></h2>
+<p>If you leave your session running for an extended period, your Kerberos
+ticket may expire, preventing you from editing files.  To circumvent
+this, you'll need to kill your existing session and initiate a new one.
+You can do this by opening the command pallet and searching for
+<code>Remote-SSH: Kill VS Code Server on Host...</code> and selecting the
+appropriate host when prompted.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../getting-started/file-access.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../getting-started/file-access.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../contributors.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -238,10 +175,10 @@ would be:</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../getting-started/file-access.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../getting-started/file-access.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../contributors.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
